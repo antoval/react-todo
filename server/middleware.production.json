@@ -1,0 +1,15 @@
+{
+  "files": {
+    "loopback#static": {
+      "paths": "/",
+      "params": "$!../client"
+    }
+  },
+  "final:after": {
+    "loopback#errorHandler": {
+      "params": {
+        "includeStack": false
+      }
+    }
+  }
+}
