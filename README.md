@@ -1,5 +1,8 @@
 # Simple React + Loopback Todo app
 
+### Heroku demo:
+Running demo on <https://fathomless-eyrie-10469.herokuapp.com/>.
+
 ### Starting the app:
 
 `npm install`
