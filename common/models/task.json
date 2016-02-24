@@ -1,5 +1,8 @@
 {
   "name": "Task",
+  "mongodb": {
+    "collection": "TaskCollection"
+  },
   "plural": "Tasks",
   "base": "PersistedModel",
   "idInjection": true,

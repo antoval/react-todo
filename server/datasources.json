@@ -1,6 +1,9 @@
 {
-  "db": {
-    "name": "db",
-    "connector": "memory"
+  "mongo-todo": {
+    "name": "mongo-todo",
+    "connector": "mongodb",
+    "host": "ds015878.mongolab.com",
+    "database": "heroku_1m6mdxwk",
+    "port": 15878
   }
 }

@@ -13,27 +13,24 @@
       "./mixins"
     ]
   },
-  "User": {
-    "dataSource": "db"
-  },
   "AccessToken": {
-    "dataSource": "db",
+    "dataSource": "mongo-todo",
     "public": false
   },
   "ACL": {
-    "dataSource": "db",
+    "dataSource": "mongo-todo",
     "public": false
   },
   "RoleMapping": {
-    "dataSource": "db",
+    "dataSource": "mongo-todo",
     "public": false
   },
   "Role": {
-    "dataSource": "db",
+    "dataSource": "mongo-todo",
     "public": false
   },
   "Task": {
-    "dataSource": "db",
+    "dataSource": "mongo-todo",
     "public": true
   }
 }
