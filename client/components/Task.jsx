@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect, PromiseState } from 'react-refetch'
-import classNames from 'classNames'
+import classNames from 'classnames'
 
 export default class Task extends Component {
   constructor(props){
