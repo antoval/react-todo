@@ -1,0 +1,24 @@
+.app {
+  @include container(full);
+  padding: $base-lh;
+  text-align: center;
+}
+.app__title {
+  font-size: ms(3);
+  font-weight: 300;
+  margin: 0;
+  margin-bottom: 2*$base-lh;
+}
+.app__updating-notice {
+  position: fixed;
+  top: 0;
+  left:0;
+  width: 100%;
+  font-size: ms(1);
+  text-align: center;
+  color: $secondaryText;
+  &--hide{
+    display:none;
+  }
+
+}

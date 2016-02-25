@@ -15,7 +15,7 @@ var config = require('../webpack.config.'+mode+'.js');
 var compiler = webpack(config);
 
 
-
+console.log(config.output.publicPath)
 if(mode === env.DEVELOPMENT) {
   // only need in development
   app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));

@@ -2,36 +2,60 @@ import React, { Component } from 'react'
 import { connect, PromiseState } from 'react-refetch'
 import TaskList from './TaskList.jsx';
 import Form from './Form.jsx';
+import Footer from './Layout/Footer.jsx';
+import '../styles/main.scss';
+import classNames from 'classNames';
 
-
+var oldSubmitTaskResponse,oldRemoveTaskResponse, oldModifyTaskResponse;
 
 class App extends Component {
+  componentDidMount(){
+    this.props.refreshTasks()
+  }
+  componentDidUpdate(){
+    //check if updated (can and should be optimized)
+    var {  submitTaskResponse, removeTaskResponse, modifyTaskResponse, refreshTasks } = this.props;
+    if(submitTaskResponse && submitTaskResponse != oldSubmitTaskResponse && submitTaskResponse.fulfilled){
+      oldSubmitTaskResponse = submitTaskResponse;
+      refreshTasks();
+    }
+    if(removeTaskResponse && removeTaskResponse != oldRemoveTaskResponse && removeTaskResponse.fulfilled){
+      oldRemoveTaskResponse = removeTaskResponse;
+      refreshTasks();
+    }
+    if(modifyTaskResponse && modifyTaskResponse != oldModifyTaskResponse && modifyTaskResponse.fulfilled){
+      oldModifyTaskResponse = modifyTaskResponse;
+      refreshTasks();
+    }
+
+
+  }
   render() {
-    const { taskFetch, submitTask, modifyTask, refreshTasks } = this.props;
-    if (taskFetch.fulfilled) {
+    var {  submitTask, removeTask, modifyTask, taskFetchResponse } = this.props;
+
+    if (taskFetchResponse && taskFetchResponse.fulfilled) {
       return (
-        <div>
-          <Form submitTask={submitTask} refreshTasks={refreshTasks}/>
-          <TaskList tasks={taskFetch.value} modifyTask={modifyTask}/>
+        <div className="app">
+          <h1 className="app__title">todos</h1>
+          <Form submitTask={submitTask} />
+          <TaskList tasks={this.props.taskFetchResponse.value} removeTask={removeTask} modifyTask={modifyTask}/>
+          <Footer/>
         </div>
       )
     } else{
       return (
-        <div>Loading...</div>
+        <div className="app__updating-notice">Refreshing...</div>
       )
     }
   }
 }
 
 export default connect(props => ({
-  taskFetch: {
-    url:'/api/Tasks'
-  },
   refreshTasks: () => ({
-    taskFetch: {
+    taskFetchResponse: {
       url:'/api/Tasks',
       force: true,
-      refreshing: true
+      refreshing: false
     }
   }),
   submitTask: title => ({
@@ -41,6 +65,12 @@ export default connect(props => ({
       body: JSON.stringify({
         title:title
       })
+    }
+  }),
+  removeTask: taskId => ({
+    removeTaskResponse: {
+      url: `/api/Tasks/${taskId}`,
+      method: 'DELETE'
     }
   }),
   modifyTask: (taskId, title, isCompleted) => ({
