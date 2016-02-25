@@ -4,7 +4,6 @@ import TaskList from './TaskList.jsx';
 import Form from './Form.jsx';
 import Footer from './Layout/Footer.jsx';
 import '../styles/main.scss';
-import classNames from 'classNames';
 
 var oldSubmitTaskResponse,oldRemoveTaskResponse, oldModifyTaskResponse;
 
